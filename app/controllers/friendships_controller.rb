@@ -7,4 +7,10 @@ class FriendshipsController < ApplicationController
     redirect_to my_friends_path
   end
 
+
+  def create
+    friend = User.find(params[:friend])
+    current_user.friends << friend
+  end
+
 end

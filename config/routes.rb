@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :user_stocks, only: [:create, :destroy]
-  resources :friendships, only: [:destroy]
+  resources :friendships, only: [:destroy, :create]
   devise_for :users
   root 'welcome#index'
 

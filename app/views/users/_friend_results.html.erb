@@ -1,8 +1,15 @@
 <div class="results-block">
   <%= render "shared/messages" %>
 </div>
-<% if @user %>
-  <div class="card card-header results-block">
-  </div>
+<% if @friends %>
+  <% @friends.each do |friend| %>
+    <% next if friend == current_user %>
+    <div class="card card-header results-block">
+      <strong>Email:</strong> <%= friend.email %>
+      <strong>First name:</strong> <%= friend.first_name %>
+      <strong>Last name:</strong> <%= friend.last_name %>
+      <strong>Profile:</strong> <%= link_to "View profile", "#", class: "btn btn-sm btn-success" %>
+      <%= link_to "Follow friend?", friendships_path({friend: friend.id}), class: "btn btn-sm btn-success", method: :post %>
+    </div>
+  <% end %>
 <% end %>
-<div>    Hey there</div>
