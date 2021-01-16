@@ -30,4 +30,28 @@ class User < ApplicationRecord
     "Anonymous"
   end
 
+  def self.search(query)
+    query.strip!
+    to_send_back = (first_name_matches(query) + last_name_matches(query) + email_matches(query)).uniq
+    return nil unless to_send_back
+    to_send_back
+  end
+
+  def self.first_name_matches(query)
+    matches("first_name", query)
+  end
+
+  def self.last_name_matches(query)
+    matches("last_name", query)
+  end
+
+  def self.email_matches(query)
+    matches("email", query)
+  end
+
+  def self.matches(field_name, query)
+    where("#{field_name} like ?", "%#{query}%")
+  end
+
+
 end

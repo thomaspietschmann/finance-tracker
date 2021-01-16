@@ -1,0 +1,45 @@
+<h1>My Friends</h1>
+<div class="row mt-5">
+  <div class="search-area">
+    <h3>Search friends</h3>
+    <%= form_tag search_user_path, remote: true, method: :get do %>
+      <div class="form-group row">
+        <div class="col-sm-9 no-right-padding">
+          <%= text_field_tag :query, nil, placeholder: "Name or email", autofocus: true, class: "form-control form-control-lg" %>
+        </div>
+        <div class="col-sm-3 no-left-padding">
+          <%= button_tag type: :submit, class: "btn btn-success" do %>
+            <%= fa_icon "search 2x" %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+    <div id="results">
+    </div>
+    <div class="col-9">
+      <% if !@my_friends.empty? %>
+        <table class="table table-bordered table-hover">
+          <thead>
+            <tr>
+              <th scope="col">First Name</th>
+              <th scope="col">Last Name</th>
+              <th scope="col">Email</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @my_friends.each do |friend| %>
+              <tr>
+                <td><%= friend.first_name %></td>
+                <td><%= friend.last_name %></td>
+                <td><%= friend.email %></td>
+                <td><%= link_to "Remove", friendship_path(friend), method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-sm btn-danger" %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      <% else %>
+        <div>No friends added so far</div>
+      <% end %>
+    </div>
+  </div>
