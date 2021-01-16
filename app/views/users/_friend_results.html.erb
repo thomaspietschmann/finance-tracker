@@ -2,14 +2,18 @@
   <%= render "shared/messages" %>
 </div>
 <% if @friends %>
-  <% @friends.each do |friend| %>
-    <% next if friend == current_user %>
-    <div class="card card-header results-block">
-      <strong>Email:</strong> <%= friend.email %>
-      <strong>First name:</strong> <%= friend.first_name %>
-      <strong>Last name:</strong> <%= friend.last_name %>
-      <strong>Profile:</strong> <%= link_to "View profile", "#", class: "btn btn-sm btn-success" %>
-      <%= link_to "Follow friend?", friendships_path({friend: friend.id}), class: "btn btn-sm btn-success", method: :post %>
-    </div>
+  <div class="card card-header results-block">
+    <table class="col-md-12">
+      <tbody>
+        <% @friends.each do |friend| %>
+          <tr>
+            <td><strong>Email:</strong> <%= friend.email %></td>
+            <td><strong>First name:</strong> <%= friend.first_name %></td>
+            <td><strong>Last name:</strong> <%= friend.last_name %></td>
+            <td><strong>Profile:</strong> <%= link_to "View profile", "#", class: "btn btn-sm btn-success" %>
+              <%= link_to "Follow friend?", friendships_path({friend: friend.id}), class: "btn btn-sm btn-success", method: :post %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
   <% end %>
-<% end %>

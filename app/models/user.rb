@@ -53,5 +53,13 @@ class User < ApplicationRecord
     where("#{field_name} like ?", "%#{query}%")
   end
 
+  def except_current_user(users)
+    users.reject { |user| user.id == self.id }
+  end
+
+  def filter_existing_friends(users)
+    users.reject {|user| self.friends.include? user }
+  end
+
 
 end
