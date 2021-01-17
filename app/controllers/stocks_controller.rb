@@ -19,4 +19,13 @@ class StocksController < ApplicationController
       end
     end
   end
+
+  def update
+    stock = Stock.find(params[:id])
+    old_price = stock.last_price
+    stock.update_price
+    flash[:alert] = "Price updated from #{old_price} to #{stock.last_price}"
+    redirect_to my_portfolio_path
+  end
+
 end

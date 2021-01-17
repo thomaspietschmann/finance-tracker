@@ -23,4 +23,11 @@ class Stock < ApplicationRecord
   def self.check_db(ticker_symbol)
     find_by(ticker: ticker_symbol)
   end
+
+  def update_price
+    updated_info = Stock.new_lookup(self.ticker)
+    self.last_price = updated_info.last_price
+    self.save
+  end
+
 end

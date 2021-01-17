@@ -17,6 +17,7 @@
               <td><%= stock.name %></td>
               <td><%= stock.last_price %></td>
               <td>
+                <%= link_to "Update price", stock_path(stock), class: "btn btn-success", remote: true, method: :patch %>
                 <% if current_user.can_track_stock?(stock.ticker)%>
                   <%= link_to "Add to portfolio", user_stocks_path(user: current_user, ticker: stock.ticker), class: "btn btn-success", method: :post %>
                 <% elsif current_user.id != @user.id %>

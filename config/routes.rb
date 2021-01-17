@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :users, only: [:show]
   resources :user_stocks, only: [:create, :destroy]
   resources :friendships, only: [:destroy, :create]
-
+  resources :stocks, only: [:update]
   root 'welcome#index'
 
   get '/my_portfolio', to: 'users#my_portfolio'
