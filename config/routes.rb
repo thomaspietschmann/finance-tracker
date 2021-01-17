@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
+  devise_for :users
+
   resources :user_stocks, only: [:create, :destroy]
   resources :friendships, only: [:destroy, :create]
-  devise_for :users
+
   root 'welcome#index'
 
   get '/my_portfolio', to: 'users#my_portfolio'
