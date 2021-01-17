@@ -57,9 +57,13 @@ class User < ApplicationRecord
     users.reject { |user| user.id == self.id }
   end
 
-  def filter_existing_friends(users)
-    users.reject {|user| self.friends.include? user }
+  def not_friends_with?(friend_id)
+    !self.friends.where(id: friend_id).exists?
   end
+
+  # def filter_existing_friends(users)
+  #   users.reject {|user| self.friends.include? user }
+  # end
 
 
 end

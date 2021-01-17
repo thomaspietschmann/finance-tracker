@@ -12,7 +12,7 @@ class UsersController < ApplicationController
     if params[:query].present?
       @friends = User.search(params[:query])
       @friends = current_user.except_current_user(@friends)
-      @friends = current_user.filter_existing_friends(@friends)
+      # @friends = current_user.filter_existing_friends(@friends)
       if @friends
         respond_to do |format|
           format.js { render partial: 'users/friend_results' }
@@ -32,17 +32,3 @@ class UsersController < ApplicationController
   end
 
 end
-
-
-
-      # if @user
-      #   respond_to do |format|
-      #     format.js { render partial: 'users/friend_results' }
-      #   end
-      # else
-      #   respond_to do |format|
-      #     flash.now[:alert] = 'No user found.'
-      #     format.js { render partial: 'users/friend_results'
-      #   end
-      # end
-
