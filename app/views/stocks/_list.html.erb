@@ -6,7 +6,8 @@
           <tr>
             <th scope="col">Ticker</th>
             <th scope="col">Name</th>
-            <th scope="col">Price</th>
+            <th scope="col">Prev Price</th>
+            <th scope="col">Last Price</th>
             <th scope="col">Actions</th>
           </tr>
         </thead>
@@ -15,7 +16,8 @@
             <tr>
               <th scope="row"><%= stock.ticker %></th>
               <td><%= stock.name %></td>
-              <td><%= stock.last_price %></td>
+              <td><%= number_with_precision(stock.prev_price, precision: 2) %></td>
+              <td><%= number_with_precision(stock.last_price, precision: 2) %></td>
               <td>
                 <%= link_to "Update price", stock_path(stock), class: "btn btn-success", remote: true, method: :patch %>
                 <% if current_user.can_track_stock?(stock.ticker)%>
